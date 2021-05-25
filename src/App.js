@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import Login from "./Login/Login";
+import Register from "./Login/Register";
+import Home from "./components/Home";
+import TablePanel from "./components/TabPanel";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Button from "./components/Button";
 
 const apiUrl = "http://localhost:8080";
+
 axios.interceptors.request.use(
   (config) => {
     const { origin } = new URL(config.url);
@@ -20,27 +26,46 @@ axios.interceptors.request.use(
 );
 
 function App() {
-  const storedJwt = localStorage.getItem("token");
+  let storedJwt = localStorage.getItem("token");
   const [jwt, setJwt] = useState(storedJwt || null);
-  const [user, setUser] = useState([]);
-  const [fetchError] = useState(null);
+  const [loginForm, setLoginForm] = useState(true);
+  const [user, setUser] = useState({
+    emailAddress: null,
+    firstName: null,
+    id: null,
+    lastName: null,
+    password: null,
+    role: null,
+    userMeasurement: null,
+    userPhoto: null,
+    username: null,
+  });
 
-  const options = {
-    url: `${apiUrl}/login`,
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: {
-      username: "admin",
-      password: "admin",
-    },
+  const optionsPost = (object, api) => {
+    return {
+      url: `${apiUrl}${api}`,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: object,
+    };
   };
 
-  const getJwt = async () => {
-    await axios(options)
+  const optionsGet = (api) => {
+    return {
+      url: `${apiUrl}${api}`,
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+  };
+
+  //GET JWT
+  const getJwt = async (credentials) => {
+    await axios(optionsPost(credentials, "/login"))
       .then((res) => {
-        console.log(res);
         localStorage.setItem("token", res.headers.authorization);
         setJwt(res.headers.authorization);
       })
@@ -49,35 +74,90 @@ function App() {
       });
   };
 
-  const getUser = async () => {
-    await axios
-      .get(`${apiUrl}/api/user/get`)
+  //GET USER
+  const getUser = () => {
+    return new Promise((resolve, reject) => {
+      axios(optionsGet("/api/user"))
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          console.error(error);
+          reject(error);
+        });
+    });
+  };
+
+  //ADD USER
+  const addUser = async (userInfo) => {
+    await axios(optionsPost(userInfo, "/api/user"))
       .then((res) => {
         console.log(res);
-        setJwt(res.data);
+        setLoginForm(!loginForm);
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-  return (
-    <>
-      <section style={{ marginBottom: "10px" }}>
-        <button onClick={() => getJwt()}>Get JWT</button>
-        <button onClick={() => getUser()}>Get User</button>
-        {jwt && (
-          <pre>
-            <code>{jwt}</code>
-          </pre>
-        )}
-        <Login></Login>
-      </section>
-      <section>
+  const onLogin = async (credentials) => {
+    await getJwt(credentials);
+    const localUser = await getUser();
+    setUser(localUser);
+    console.log(localUser);
+  };
 
-        {fetchError && <p style={{ color: "red" }}>{fetchError}</p>}
-      </section>
-    </>
+  const onRegister = async (userInformation) => {
+    console.log(userInformation);
+    addUser(userInformation);
+  };
+
+  const onLogout = () => {
+    setJwt(null);
+    localStorage.clear();
+    storedJwt = null;
+  };
+
+  const onSwitchToForm = () => {
+    setLoginForm(!loginForm);
+  };
+
+  if (jwt) {
+    getUser();
+  }
+
+  return (
+    <Router>
+      <Route exact path="/">
+        {jwt ? (
+          <div className="container-log">
+            <Home user={user} />
+            <Button color="green" text="Logout" onClick={onLogout} />
+          </div>
+        ) : (
+          <div className="container">
+            {loginForm ? (
+              <Login onLogin={onLogin} />
+            ) : (
+              <Register onRegister={onRegister} />
+            )}
+            <Button
+              className="btn btn-block"
+              color="blue"
+              text={
+                loginForm ? "Have not account yet ?" : "Switch to Login form"
+              }
+              onClick={onSwitchToForm}
+            />
+          </div>
+        )}
+      </Route>
+     
+      <Route path="/home" component={Home} />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
+    </Router>
   );
 }
+
 export default App;
