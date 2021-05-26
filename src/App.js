@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import Login from "./Login/Login";
+import SignInSide from "./components/SignInSide";
 import Register from "./Login/Register";
 import Home from "./components/Home";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Button from "./components/Button";
+import DashBoard from "./dashboard/Dashboard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const apiUrl = "http://localhost:8080";
 
@@ -27,7 +31,6 @@ axios.interceptors.request.use(
 function App() {
   let storedJwt = localStorage.getItem("token");
   const [jwt, setJwt] = useState(storedJwt || null);
-  const [loginForm, setLoginForm] = useState(true);
   const [user, setUser] = useState();
 
   //GET JWT
@@ -39,7 +42,20 @@ function App() {
       })
       .catch((error) => {
         console.error(error);
+        toastMe();
       });
+  };
+
+  const toastMe = () => {
+    toast.error("🦄 User was not found", {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   const optionsPost = (object, api) => {
@@ -74,6 +90,15 @@ function App() {
         .catch((error) => {
           console.error(error);
           reject(error);
+          toast.error("🦄 User was not found", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         });
     });
   };
@@ -83,10 +108,18 @@ function App() {
     await axios(optionsPost(userInfo, "/api/user"))
       .then((res) => {
         console.log(res);
-        setLoginForm(!loginForm);
       })
       .catch((error) => {
         console.error(error);
+        toast.error("🦄 User was not found", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 
@@ -115,40 +148,24 @@ function App() {
     storedJwt = null;
   };
 
-  const onSwitchToForm = () => {
-    setLoginForm(!loginForm);
-  };
-
   return (
-    <Router>
-      <Route exact path="/">
-        {user && user.username? (
-          <div className="container-log">
-            <Home user={user} />
-            <Button color="green" text="Logout" onClick={onLogout} />
-          </div>
-        ) : (
-          <div className="container">
-            {loginForm ? (
-              <Login onLogin={onLogin} />
-            ) : (
-              <Register onRegister={onRegister} />
-            )}
-            <Button
-              className="btn btn-block"
-              color="grey"
-              text={
-                loginForm ? "Have not account yet ?" : "Switch to Login form"
-              }
-              onClick={onSwitchToForm}
-            />
-          </div>
-        )}
-      </Route>
-      <Route path="/home" component={Home} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-    </Router>
+    <div>
+      <ToastContainer />
+      <Router>
+        <Route exact path="/">
+          {user && user.username ? (
+            <div className="container-log">
+              <DashBoard onLogout={onLogout} />
+            </div>
+          ) : (
+            <SignInSide onLogin={onLogin} onRegister={onRegister} />
+          )}
+        </Route>
+        <Route path="/home" component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+      </Router>
+    </div>
   );
 }
 
