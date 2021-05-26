@@ -21,10 +21,10 @@ function Login({ onLogin }) {
   return (
     <form className="add-form" onSubmit={onSubmit}>
       <div className="form-control">
-        <label>Username / Email</label>
+        <label>Username/E-mail</label>
         <input
           type="text"
-          placeholder="Username/E-mail"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -38,7 +38,7 @@ function Login({ onLogin }) {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <input type="submit" value="Login" color="green" className="btn btn-block" />
+      <input type="submit" value="Login" className="btn btn-block" />
     </form>
   );
 }
