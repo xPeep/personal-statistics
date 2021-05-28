@@ -23,6 +23,7 @@ import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Button from "@material-ui/core/Button";
+import { logout } from "../components/LoginDataService";
 
 function Copyright() {
   return (
@@ -118,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard({ onLogout }) {
+export default function Dashboard({ logged }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -128,6 +129,11 @@ export default function Dashboard({ onLogout }) {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const onLogout = () => {
+    logout();
+    logged();
+  };
 
   return (
     <div className={classes.root}>
@@ -186,8 +192,8 @@ export default function Dashboard({ onLogout }) {
         <List>{secondaryListItems}</List>
       </Drawer>
       <main className={classes.content}>
-      <div className={classes.appBarSpacer} />
-      <Container maxWidth="lg" className={classes.container}>
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
@@ -204,7 +210,7 @@ export default function Dashboard({ onLogout }) {
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-              <Orders />
+                <Orders />
               </Paper>
             </Grid>
           </Grid>

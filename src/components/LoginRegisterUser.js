@@ -12,6 +12,8 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { login } from "./LoginDataService";
+import { addUser } from "../data-service/UserDataService";
 
 function Copyright() {
   return (
@@ -59,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide({ onLogin, onRegister }) {
+export default function LoginRegisterUser({ logged }) {
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -72,10 +74,15 @@ export default function SignInSide({ onLogin, onRegister }) {
     e.preventDefault();
 
     if (loginForm) {
-      onLogin({ username, password });
+      login({ username, password }).then(() => logged());
     } else {
-      onRegister({ username, password, firstName, lastName, emailAddress });
-      onSwitchToForm();
+      addUser({ username, password, firstName, lastName, emailAddress }).then(
+        (result) => {
+          if (result) {
+            onSwitchToForm();
+          }
+        }
+      );
     }
   };
 
@@ -93,7 +100,7 @@ export default function SignInSide({ onLogin, onRegister }) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-          {loginForm ? "Sign In" : "Register"}
+            {loginForm ? "Sign In" : "Register"}
           </Typography>
           <form className={classes.form} noValidate onSubmit={onSubmit}>
             <TextField
