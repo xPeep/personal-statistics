@@ -23,7 +23,7 @@ import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Button from "@material-ui/core/Button";
-import { logout } from "../components/LoginDataService";
+import { logout } from "../data-service/LoginDataService";
 
 function Copyright() {
   return (

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
-import LoginRegisterUser from "./components/LoginRegisterUser";
+import LoginRegisterUser from "./data-service/LoginRegisterUser";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import DashBoard from "./dashboard/Dashboard";
 import { ToastContainer } from "react-toastify";
-import { loginStatus } from "./components/LoginDataService";
+import { loginStatus } from "./data-service/LoginDataService";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {

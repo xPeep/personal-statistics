@@ -13,7 +13,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { login } from "./LoginDataService";
-import { addUser } from "../data-service/UserDataService";
+import { addUser } from "./UserDataService";
 
 function Copyright() {
   return (
