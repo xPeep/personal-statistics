@@ -6,101 +6,26 @@ import SignInSide from "./components/SignInSide";
 import Register from "./Login/Register";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Button from "./components/Button";
 import DashBoard from "./dashboard/Dashboard";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import ToastMe from "./components/ToastMe";
+import { optionsPost, optionsGet } from "./components/ApiOptions";
+import { login, logout, isLogged } from "./components/LoginDataService";
 import "react-toastify/dist/ReactToastify.css";
 
-const apiUrl = "http://localhost:8080";
-
-axios.interceptors.request.use(
-  (config) => {
-    const { origin } = new URL(config.url);
-    const allowedOrigins = [apiUrl];
-    const token = localStorage.getItem("token");
-    if (allowedOrigins.includes(origin)) {
-      config.headers.authorization = token;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 function App() {
-  let storedJwt = localStorage.getItem("token");
-  const [jwt, setJwt] = useState(storedJwt || null);
   const [user, setUser] = useState();
 
-  //GET JWT
-  const getJwt = async (credentials) => {
-    await axios(optionsPost(credentials, "/login"))
+  //GET USER
+  const getUser = async () => {
+    await axios(optionsGet("/api/user"))
       .then((res) => {
-        localStorage.setItem("token", res.headers.authorization);
-        setJwt(res.headers.authorization);
+        setUser(res.data);
       })
       .catch((error) => {
         console.error(error);
-        toastMe();
+        ToastMe("🦄 User was not found");
       });
-  };
-
-  const toastMe = () => {
-    toast.error("🦄 User was not found", {
-      position: "bottom-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-
-  const optionsPost = (object, api) => {
-    return {
-      url: `${apiUrl}${api}`,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: object,
-    };
-  };
-
-  const optionsGet = (api) => {
-    return {
-      url: `${apiUrl}${api}`,
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-  };
-
-  //GET USER
-  const getUser = () => {
-    return new Promise((resolve, reject) => {
-      axios(optionsGet("/api/user"))
-        .then((res) => {
-          setUser(res.data);
-          resolve(res.data);
-        })
-        .catch((error) => {
-          console.error(error);
-          reject(error);
-          toast.error("🦄 User was not found", {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        });
-    });
   };
 
   //ADD USER
@@ -111,29 +36,20 @@ function App() {
       })
       .catch((error) => {
         console.error(error);
-        toast.error("🦄 User was not found", {
-          position: "bottom-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        ToastMe("🦄 Register failed");
       });
   };
 
   useEffect(() => {
-    if (jwt && !user) {
+    if (isLogged() && !user) {
       getUser();
     }
-  }, [jwt]);
+  });
 
-  const onLogin = async (credentials) => {
-    await getJwt(credentials);
-    const localUser = await getUser();
-    setUser(localUser);
-    console.log(localUser);
+  const onLogin = (credentials) => {
+    login(credentials).then(() => {
+      setUser(getUser());
+    });
   };
 
   const onRegister = async (userInformation) => {
@@ -142,10 +58,8 @@ function App() {
   };
 
   const onLogout = () => {
-    setJwt(null);
-    localStorage.clear();
+    logout();
     setUser(null);
-    storedJwt = null;
   };
 
   return (
