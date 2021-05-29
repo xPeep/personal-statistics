@@ -11,6 +11,10 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+.container-flex {
+  display: flex; /* or inline-flex */
+}
+
 .container {
   max-width: 500px;
   margin: 30px auto;

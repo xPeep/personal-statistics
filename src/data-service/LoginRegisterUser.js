@@ -14,19 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { login } from "./LoginDataService";
 import { addUser } from "./UserDataService";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://personal-statistics.com/">
-        https://personal-statistics.com/
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Copyright from "../dashboard/Copyright";
 
 const useStyles = makeStyles((theme) => ({
   root: {
