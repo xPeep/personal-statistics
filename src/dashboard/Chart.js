@@ -1,56 +1,47 @@
 import React from "react";
-import { useTheme } from "@material-ui/core/styles";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Label,
-  ResponsiveContainer,
-} from "recharts";
+import {useTheme} from "@material-ui/core/styles";
+import {Label, Line, LineChart, ResponsiveContainer, XAxis, YAxis,} from "recharts";
 import Title from "./Title";
-
+import moment from 'moment';
 // Generate Sales Data
 function createData(time, amount) {
-  return { time, amount };
+    return {time, amount};
 }
 
-export default function Chart({ data, typeLine, name, color }) {
-  const theme = useTheme();
+export default function Chart({data, typeLine, name, color}) {
+    const theme = useTheme();
 
-  console.log(data);
-
-  return (
-    <React.Fragment>
-      <Title>{name}</Title>
-      <ResponsiveContainer>
-        <LineChart
-          data={data}
-          margin={{
-            top: 16,
-            right: 16,
-            bottom: 0,
-            left: 24,
-          }}
-        >
-          <XAxis dataKey="timestamp" stroke={theme.palette.text.secondary}/>
-          <YAxis stroke={theme.palette.text.secondary}>
-            <Label
-              angle={270}
-              position="left"
-              style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
-            >
-              Size (cm)
-            </Label>
-          </YAxis>
-          <Line
-            type="monotone"
-            dataKey={typeLine}
-            stroke={color}
-            dot={false}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </React.Fragment>
-  );
+    return (
+        <React.Fragment>
+            <Title>{name}</Title>
+            <ResponsiveContainer>
+                <LineChart
+                    data={data}
+                    margin={{
+                        top: 16,
+                        right: 16,
+                        bottom: 0,
+                        left: 24,
+                    }}
+                >
+                    <XAxis dataKey="timestamp"  tickFormatter={(tick) => moment(tick).format('YYYY-MM-DD')} stroke={theme.palette.text.secondary} interval={0}/>
+                    <YAxis stroke={theme.palette.text.secondary}>
+                        <Label
+                            angle={270}
+                            position="left"
+                            style={{textAnchor: "middle", fill: theme.palette.text.primary}}
+                        >
+                            Size (cm)
+                        </Label>
+                    </YAxis>
+                    <Line
+                        type="monotone"
+                        dataKey={typeLine}
+                        stroke={color}
+                        dot={false}
+                    />
+                </LineChart>
+            </ResponsiveContainer>
+        </React.Fragment>
+    );
 }

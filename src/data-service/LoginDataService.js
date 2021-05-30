@@ -1,25 +1,25 @@
 import ToastMe from "../components/ToastMe";
 import axios from "axios";
-import { optionsPost } from "../components/ApiOptions";
+import {optionsPost} from "../components/ApiOptions";
 
 const login = async (credentials) => {
-  return axios(optionsPost(credentials, "/login"))
-    .then((res) => {
-      localStorage.setItem("token", res.headers.authorization);
-      console.log(res.headers.authorization);
-    })
-    .catch((error) => {
-      console.error(error);
-      ToastMe("Credentials are not valid");
-    });
+    return axios(optionsPost(credentials, "/login"))
+        .then((res) => {
+            localStorage.setItem("token", res.headers.authorization);
+            console.log(res.headers.authorization);
+        })
+        .catch((error) => {
+            console.error(error);
+            ToastMe("Credentials are not valid");
+        });
 };
 
 const loginStatus = () => {
-  return localStorage.getItem("token") != null;
+    return localStorage.getItem("token") != null;
 };
 
 const logout = () => {
-  localStorage.clear();
+    localStorage.clear();
 };
 
-export { login, logout, loginStatus };
+export {login, logout, loginStatus};
