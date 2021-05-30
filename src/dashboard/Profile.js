@@ -17,6 +17,7 @@ function Profile() {
       setFirstName(data.firstName);
       setLastName(data.lastName);
       setEmailAddress(data.emailAddress);
+      console.log(data)
     });
   }, []);
 

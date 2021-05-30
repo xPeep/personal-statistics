@@ -28,6 +28,16 @@ const optionsPost = (object, api) => {
   };
 };
 
+const optionsDelete = (api) => {
+  return {
+    url: `${apiUrl}${api}`,
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+};
+
 const optionsGet = (api) => {
   return {
     url: `${apiUrl}${api}`,
@@ -38,4 +48,4 @@ const optionsGet = (api) => {
   };
 };
 
-export {optionsPost, optionsGet}
+export {optionsPost, optionsGet, optionsDelete}
