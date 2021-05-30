@@ -35,12 +35,12 @@ function TaskForm(props) {
             }} onSubmit={onSubmitHandler}>
                 <input
                     style={{
-                        width:"100%",
-                        fontSize:"24px",
+                        width: "100%",
+                        fontSize: "24px",
                         fontWeight: "bold"
                     }}
                     type={"text"} placeholder={"Description"} value={taskName}
-                       onChange={(e => setTaskName(e.target.value))}/>
+                    onChange={(e => setTaskName(e.target.value))}/>
                 <input
                     style={{
                         width: "100px",
