@@ -119,6 +119,7 @@ function MeasurementsForm({
                     name="weight"
                     fullWidth={true}
                     value={weight}
+                    type="number"
                     onChange={(e) => setWeight(e.target.value)}
                 />
                 <TextField
@@ -137,6 +138,7 @@ function MeasurementsForm({
                     margin="normal"
                     label="Chest size"
                     name="chestSize"
+                    type="number"
                     fullWidth={true}
                     value={chestSize}
                     onChange={(e) => setChestSize(e.target.value)}
@@ -147,6 +149,7 @@ function MeasurementsForm({
                     margin="normal"
                     label="Left hand size"
                     name="leftHandSize"
+                    type="number"
                     fullWidth={true}
                     value={leftHandSize}
                     onChange={(e) => setLeftHandSize(e.target.value)}
@@ -157,6 +160,7 @@ function MeasurementsForm({
                     id="rightHandSize"
                     label="Right hand size"
                     name="rightHandSize"
+                    type="number"
                     fullWidth={true}
                     value={rightHandSize}
                     onChange={(e) => setRightHandSize(e.target.value)}
@@ -167,6 +171,7 @@ function MeasurementsForm({
                     id="leftLegSize"
                     label="Left leg size"
                     name="leftLegSize"
+                    type="number"
                     fullWidth={true}
                     value={leftLegSize}
                     onChange={(e) => setLeftLegSize(e.target.value)}
@@ -177,6 +182,7 @@ function MeasurementsForm({
                     id="rightLegSize"
                     label="Right leg size"
                     name="rightLegSize"
+                    type="number"
                     fullWidth={true}
                     value={rightLegSize}
                     onChange={(e) => setRightLegSize(e.target.value)}
