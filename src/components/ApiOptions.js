@@ -38,6 +38,7 @@ const optionsDelete = (api) => {
   };
 };
 
+
 const optionsGet = (api) => {
   return {
     url: `${apiUrl}${api}`,

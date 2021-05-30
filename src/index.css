@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
-
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -8,23 +7,16 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .container-flex {
   display: flex;
-  overflow: auto;
-  justify-content: space-between;
 }
 
 .container {
-  max-width: 500px;
-  margin: 30px auto;
-  overflow: auto;
-  min-height: 300px;
-  padding: 30px;
-  border-radius: 5px;
-  background-color:gainsboro;
+  align-items: stretch;
+  justify-content: space-between;
 }
 
 .header {

@@ -3,7 +3,7 @@ import axios from "axios";
 import {
   optionsPost,
   optionsGet,
-  optionsDelete,
+  optionsDelete
 } from "../components/ApiOptions";
 
 const getAllMeasurements = async () => {
@@ -27,14 +27,17 @@ const deleteMeasurementById = async (id) => {
     })
     .catch((error) => {
       console.error(error);
-      ToastMe("Problem with deleting measuremets from server");
+      ToastMe("Problem with deleting measurements from server");
       return false;
     });
 };
 
-const getIntervalMeasurements = async () => {
-  return axios(optionsGet("/api/measurement"))
+const getIntervalMeasurements = async (interval) => {
+  return axios(optionsPost(interval, "/api/measurement/interval"))
     .then((res) => {
+      if (res.data === "error") {
+        return [];
+      }
       return res.data;
     })
     .catch((error) => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Switch from "@material-ui/core/Switch";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,8 +15,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MeasurementsForm({ saveMeasurement, editItemData }) {
+function MeasurementsForm({
+  saveMeasurement,
+  editItemData,
+  getDataByInterval,
+}) {
   const [timestamp, setTimestamp] = useState(
+    new Date().toISOString().substring(0, 17) + "00"
+  );
+  const [timestampStart, setTimestampStart] = useState(
+    new Date().toISOString().substring(0, 17) + "00"
+  );
+  const [timestampEnd, setTimestampEnd] = useState(
     new Date().toISOString().substring(0, 17) + "00"
   );
   const [id, setId] = useState();
@@ -46,7 +55,6 @@ function MeasurementsForm({ saveMeasurement, editItemData }) {
   }, [editItemData]);
 
   const submit = () => {
-    console.log("test");
     saveMeasurement({
       id,
       timestamp,
@@ -60,109 +68,173 @@ function MeasurementsForm({ saveMeasurement, editItemData }) {
     });
   };
 
+  const submitEdit = () => {
+    saveMeasurement({
+      timestamp,
+      weight,
+      abdomenSize,
+      chestSize,
+      leftHandSize,
+      rightHandSize,
+      leftLegSize,
+      rightLegSize,
+    });
+  };
+
+  const load = () => {
+    getDataByInterval({
+      start: timestampStart,
+      end: timestampEnd,
+    });
+  };
+
   return (
-    <div>
+    <div className="container">
+      <h1>Measurements</h1>
+      <TextField
+        required
+        margin="normal"
+        id="datetime-local"
+        label="Date time"
+        type="datetime-local"
+        value={timestamp}
+        fullWidth={true}
+        onChange={(e) => setTimestamp(e.target.value)}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
       <div className="container-flex">
-        <h1>Measurements</h1>
+        <TextField
+          required
+          id="weight"
+          margin="normal"
+          label="Weight"
+          name="weight"
+          fullWidth={true}
+          value={weight}
+          onChange={(e) => setWeight(e.target.value)}
+        />
+        <TextField
+          required
+          id="abdomenSize"
+          margin="normal"
+          label="Abdomen size"
+          name="abdomenSize"
+          fullWidth={true}
+          value={abdomenSize}
+          onChange={(e) => setAbdomenSize(e.target.value)}
+        />
+        <TextField
+          required
+          id="chestSize"
+          margin="normal"
+          label="Chest size"
+          name="chestSize"
+          fullWidth={true}
+          value={chestSize}
+          onChange={(e) => setChestSize(e.target.value)}
+        />
+        <TextField
+          required
+          id="leftHandSize"
+          margin="normal"
+          label="Left hand size"
+          name="leftHandSize"
+          fullWidth={true}
+          value={leftHandSize}
+          onChange={(e) => setLeftHandSize(e.target.value)}
+        />
+        <TextField
+          required
+          margin="normal"
+          id="rightHandSize"
+          label="Right hand size"
+          name="rightHandSize"
+          fullWidth={true}
+          value={rightHandSize}
+          onChange={(e) => setRightHandSize(e.target.value)}
+        />
+        <TextField
+          required
+          margin="normal"
+          id="leftLegSize"
+          label="Left leg size"
+          name="leftLegSize"
+          fullWidth={true}
+          value={leftLegSize}
+          onChange={(e) => setLeftLegSize(e.target.value)}
+        />
+        <TextField
+          required
+          margin="normal"
+          id="rightLegSize"
+          label="Right leg size"
+          name="rightLegSize"
+          fullWidth={true}
+          value={rightLegSize}
+          onChange={(e) => setRightLegSize(e.target.value)}
+        />
       </div>
-      <div>
-        <form className={classes.container} noValidate>
-          <TextField
-            id="datetime-local"
-            label="Date time"
-            type="datetime-local"
-            value={timestamp}
-            className={classes.textField}
-            onChange={(e) => setTimestamp(e.target.value)}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </form>
-        <div className="container-flex">
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            width="10px"
-            id="weight"
-            label="Weight"
-            name="weight"
-            value={weight}
-            onChange={(e) => setWeight(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            id="abdomenSize"
-            label="Abdomen size"
-            name="abdomenSize"
-            value={abdomenSize}
-            onChange={(e) => setAbdomenSize(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            id="chestSize"
-            label="Chest size"
-            name="chestSize"
-            value={chestSize}
-            onChange={(e) => setChestSize(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            id="leftHandSize"
-            label="Left hand size"
-            name="leftHandSize"
-            value={leftHandSize}
-            onChange={(e) => setLeftHandSize(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            id="rightHandSize"
-            label="Right hand size"
-            name="rightHandSize"
-            value={rightHandSize}
-            onChange={(e) => setRightHandSize(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            id="leftLegSize"
-            label="Left leg size"
-            name="leftLegSize"
-            value={leftLegSize}
-            onChange={(e) => setLeftLegSize(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            weight="5px"
-            id="rightLegSize"
-            label="Right leg size"
-            name="rightLegSize"
-            value={rightLegSize}
-            onChange={(e) => setRightLegSize(e.target.value)}
-          />
-        </div>
+      <div className="container-flex">
         <Button
           type="submit"
-          fullWidth
+          margin="normal"
           variant="contained"
-          color="primary"
+          color="secondary"
+          fullWidth={true}
           onClick={submit}
         >
-          Save
+          Edit
+        </Button>
+        <Button
+          type="submit"
+          margin="normal"
+          variant="contained"
+          color="default"
+          fullWidth={true}
+          onClick={submitEdit}
+        >
+          New
         </Button>
       </div>
+      <div className="container-flex">
+        <TextField
+          required
+          margin="normal"
+          id="datetime-local-start"
+          label="Date time start"
+          type="datetime-local"
+          value={timestampStart}
+          fullWidth={true}
+          onChange={(e) => setTimestampStart(e.target.value)}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          required
+          margin="normal"
+          id="datetime-local-end"
+          label="Date time end"
+          type="datetime-local"
+          value={timestampEnd}
+          fullWidth={true}
+          onChange={(e) => setTimestampEnd(e.target.value)}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </div>
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        onClick={load}
+        fullWidth={true}
+      >
+        Load
+      </Button>
     </div>
   );
 }
