@@ -130,6 +130,7 @@ function MeasurementsForm({
                     name="abdomenSize"
                     fullWidth={true}
                     value={abdomenSize}
+                    type="number"
                     onChange={(e) => setAbdomenSize(e.target.value)}
                 />
                 <TextField
