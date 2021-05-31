@@ -36,7 +36,7 @@ function MeasurementsForm({
     const [timestamp, setTimestamp] = useState(getDateTime());
     const [timestampStart, setTimestampStart] = useState(getDateTime());
     const [timestampEnd, setTimestampEnd] = useState(getDateTime());
-    const [id, setId] = useState();
+    const [id, setId] = useState(null);
     const [weight, setWeight] = useState(0);
     const [abdomenSize, setAbdomenSize] = useState(0);
     const [chestSize, setChestSize] = useState(0);
@@ -197,6 +197,7 @@ function MeasurementsForm({
                     color="secondary"
                     fullWidth={true}
                     onClick={submit}
+                    disabled={!id}
                 >
                     Edit
                 </Button>

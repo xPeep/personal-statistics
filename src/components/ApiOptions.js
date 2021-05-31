@@ -1,6 +1,5 @@
 import axios from "axios";
 
-//const apiUrl = "http://localhost:8080";
 const apiUrl = "https://personal-statistics-server.herokuapp.com";
 
 axios.interceptors.request.use(
