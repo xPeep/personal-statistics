@@ -6,7 +6,6 @@ import {editUser, getUser} from "../data-service/UserDataService";
 function Profile() {
     const [id, setId] = useState();
     const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [emailAddress, setEmailAddress] = useState("");
@@ -16,11 +15,9 @@ function Profile() {
         getUser().then((data) => {
             setId(data.id)
             setUsername(data.username);
-            setPassword(data.password)
             setFirstName(data.firstName);
             setLastName(data.lastName);
             setEmailAddress(data.emailAddress);
-            console.log(data)
         });
     }
 
@@ -30,9 +27,8 @@ function Profile() {
 
     const saveProfileChanges = () => {
         editUser({
-            id, username, password, firstName, lastName, emailAddress
+            id, username, firstName, lastName, emailAddress
         }).then((data) => {
-
             getActualUser()
         })
     }
@@ -42,6 +38,7 @@ function Profile() {
             <div className="container-flex">
                 <h1>User profile</h1>
             </div>
+
             <TextField
                 variant="outlined"
                 margin="normal"
@@ -53,19 +50,6 @@ function Profile() {
                 value={username}
                 disabled={true}
                 onChange={(e) => setUsername(e.target.value)}
-            />
-            <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="password"
-                label="Password"
-                name="password"
-                type="password"
-                value={password}
-                disabled={true}
-                onChange={(e) => setPassword(e.target.value)}
             />
             <TextField
                 variant="outlined"

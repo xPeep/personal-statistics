@@ -1,11 +1,7 @@
 const Home = ({user}) => {
     return (
-        <div>
-            <h1>USER PROFILE</h1>
-            <div>
-                <h2>Username: {user.username}</h2>
-                <h2>Email: {user.emailAddress}</h2>
-            </div>
+        <div >
+            <center><h1>Welcome to measurement statistics react application !</h1></center>
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const apiUrl = "https://personal-statistics-server.herokuapp.com";
-
+const apiUrl = "http://localhost:8080";
+//const apiUrl = "https://personal-statistics-server.herokuapp.com";
 axios.interceptors.request.use(
     (config) => {
         const {origin} = new URL(config.url);
@@ -27,6 +27,7 @@ const optionsPost = (object, api) => {
         data: object,
     };
 };
+
 
 const optionsDelete = (api) => {
     return {

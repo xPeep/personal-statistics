@@ -17,7 +17,9 @@ function App() {
         <div>
             <ToastContainer/>
             {isLogged ? (
-                <DashBoard logged={logged}/>
+                <div>
+                    <DashBoard logged={logged}/>
+                </div>
             ) : (
                 <LoginRegisterUser logged={logged}/>
             )}

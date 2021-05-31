@@ -1,5 +1,5 @@
 import React from "react";
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles, withStyles} from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -8,6 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TablePagination from "@material-ui/core/TablePagination";
 import Title from "../dashboard/Title";
 import EditIcon from "@material-ui/icons/Edit";
+import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 function preventDefault(event) {
@@ -37,6 +38,18 @@ export default function MeasurementsTable({
         setRowsPerPage(parseInt(event.target.value, 5));
         setPage(0);
     };
+
+    const CustomColorIconButtonDelete = withStyles({
+        root: {
+            color: "red"
+        }
+    })(IconButton);
+
+    const CustomColorIconButtonEdit = withStyles({
+        root: {
+            color: "orange"
+        }
+    })(IconButton);
 
     const deleteItem = (id) => {
         console.log(id);
@@ -84,16 +97,14 @@ export default function MeasurementsTable({
                                 <TableCell>{row.leftLegSize}</TableCell>
                                 <TableCell>{row.rightLegSize}</TableCell>
                                 <TableCell>
-                                    <EditIcon
-                                        onClick={selectItem.bind(this, row.id)}
-                                        color="secondary"
-                                    />
+                                    <CustomColorIconButtonEdit variant="contained" onClick={selectItem.bind(this, row.id)} color="primary">
+                                        <EditIcon/>
+                                    </CustomColorIconButtonEdit>
                                 </TableCell>
                                 <TableCell>
-                                    <DeleteForeverIcon
-                                        onClick={deleteItem.bind(this, row.id)}
-                                        color="secondary"
-                                    />
+                                    <CustomColorIconButtonDelete variant="contained" onClick={deleteItem.bind(this, row.id)} color="primary">
+                                        <DeleteForeverIcon/>
+                                    </CustomColorIconButtonDelete>
                                 </TableCell>
                             </TableRow>
                         ))}

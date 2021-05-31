@@ -18,13 +18,14 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
+import Home from "../components/Home";
 import Copyright from "./Copyright";
 import Measurements from "../measurements/Measurements";
 import Profile from "../profile/Profile";
+import HomeIcon from '@material-ui/icons/Home';
 import useStyles from "./DashBoardStyles";
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Link, Route, Switch} from "react-router-dom";
 
 export default function RootComponent({logged}) {
     const classes = useStyles();
@@ -44,6 +45,7 @@ export default function RootComponent({logged}) {
 
     return (
         <Router>
+            <Redirect to="/home" />
             <div className={classes.root}>
                 <CssBaseline/>
                 <AppBar
@@ -91,6 +93,12 @@ export default function RootComponent({logged}) {
                     </div>
                     <Divider/>
                     <List>
+                        <ListItem button component={Link} to="/home">
+                            <ListItemIcon>
+                                <HomeIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary="Home"/>
+                        </ListItem>
                         <ListItem button component={Link} to="/profile">
                             <ListItemIcon>
                                 <DashboardIcon/>
@@ -109,10 +117,13 @@ export default function RootComponent({logged}) {
                     <div className={classes.appBarSpacer}/>
                     <Container maxWidth="lg" className={classes.container}>
                         <Switch>
+                            <Route exact path="/home">
+                                <Home/>
+                            </Route>
                             <Route exact path="/measurements">
                                 <Measurements/>
                             </Route>
-                            <Route path="/profile">
+                            <Route exact path="/profile">
                                 <Profile/>
                             </Route>
                         </Switch>
