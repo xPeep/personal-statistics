@@ -37,13 +37,13 @@ function MeasurementsForm({
     const [timestampStart, setTimestampStart] = useState(getDateTime());
     const [timestampEnd, setTimestampEnd] = useState(getDateTime());
     const [id, setId] = useState(null);
-    const [weight, setWeight] = useState(0);
-    const [abdomenSize, setAbdomenSize] = useState(0);
-    const [chestSize, setChestSize] = useState(0);
-    const [leftHandSize, setLeftHandSize] = useState(0);
-    const [rightHandSize, setRightHandSize] = useState(0);
-    const [leftLegSize, setLeftLegSize] = useState(0);
-    const [rightLegSize, setRightLegSize] = useState(0);
+    const [weight, setWeight] = useState(null);
+    const [abdomenSize, setAbdomenSize] = useState(null);
+    const [chestSize, setChestSize] = useState(null);
+    const [leftHandSize, setLeftHandSize] = useState(null);
+    const [rightHandSize, setRightHandSize] = useState(null);
+    const [leftLegSize, setLeftLegSize] = useState(null);
+    const [rightLegSize, setRightLegSize] = useState(null);
 
 
     useEffect(() => {
@@ -120,7 +120,7 @@ function MeasurementsForm({
                     fullWidth={true}
                     value={weight}
                     type="number"
-                    onChange={(e) => setWeight(e.target.value)}
+                    onChange={(e) => setWeight(!e.target.value ? null : Math.abs(e.target.value))}
                 />
                 <TextField
                     required
@@ -131,7 +131,7 @@ function MeasurementsForm({
                     fullWidth={true}
                     value={abdomenSize}
                     type="number"
-                    onChange={(e) => setAbdomenSize(e.target.value)}
+                    onChange={(e) => setAbdomenSize(!e.target.value ? null : Math.abs(e.target.value))}
                 />
                 <TextField
                     required
@@ -142,7 +142,7 @@ function MeasurementsForm({
                     type="number"
                     fullWidth={true}
                     value={chestSize}
-                    onChange={(e) => setChestSize(e.target.value)}
+                    onChange={(e) => setChestSize(!e.target.value ? null : Math.abs(e.target.value))}
                 />
                 <TextField
                     required
@@ -153,7 +153,7 @@ function MeasurementsForm({
                     type="number"
                     fullWidth={true}
                     value={leftHandSize}
-                    onChange={(e) => setLeftHandSize(e.target.value)}
+                    onChange={(e) => setLeftHandSize(!e.target.value ? null : Math.abs(e.target.value))}
                 />
                 <TextField
                     required
@@ -164,7 +164,7 @@ function MeasurementsForm({
                     type="number"
                     fullWidth={true}
                     value={rightHandSize}
-                    onChange={(e) => setRightHandSize(e.target.value)}
+                    onChange={(e) => setRightHandSize(!e.target.value ? null : Math.abs(e.target.value))}
                 />
                 <TextField
                     required
@@ -175,7 +175,7 @@ function MeasurementsForm({
                     type="number"
                     fullWidth={true}
                     value={leftLegSize}
-                    onChange={(e) => setLeftLegSize(e.target.value)}
+                    onChange={(e) => setLeftLegSize(!e.target.value ? null : Math.abs(e.target.value))}
                 />
                 <TextField
                     required
@@ -186,7 +186,7 @@ function MeasurementsForm({
                     type="number"
                     fullWidth={true}
                     value={rightLegSize}
-                    onChange={(e) => setRightLegSize(e.target.value)}
+                    onChange={(e) => setRightLegSize(!e.target.value ? null : Math.abs(e.target.value))}
                 />
             </div>
             <div className="container-flex">

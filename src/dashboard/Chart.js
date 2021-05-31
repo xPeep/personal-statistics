@@ -3,10 +3,6 @@ import {useTheme} from "@material-ui/core/styles";
 import {Label, Line, LineChart, ResponsiveContainer, XAxis, YAxis,} from "recharts";
 import Title from "./Title";
 import moment from 'moment';
-// Generate Sales Data
-function createData(time, amount) {
-    return {time, amount};
-}
 
 export default function Chart({data, typeLine, name, color}) {
     const theme = useTheme();
