@@ -145,7 +145,7 @@ export default function LoginRegisterUser({logged}) {
                             </div>
                         )}
                         <Button
-                            id="buttonSubmit"
+                            id="buttonSubmit2"
                             type="submit"
                             fullWidth
                             variant="contained"
