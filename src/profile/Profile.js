@@ -86,6 +86,7 @@ function Profile() {
                 onChange={(e) => setLastName(e.target.value)}
             />
             <Button
+                id="saveProfileDataButton"
                 type="submit"
                 fullWidth
                 variant="contained"
