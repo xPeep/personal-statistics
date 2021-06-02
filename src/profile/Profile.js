@@ -26,9 +26,9 @@ function Profile() {
     }, []);
 
     const saveProfileChanges = () => {
-        editUser({
+        /*editUser({
             id, username, firstName, lastName, emailAddress
-        })
+        })*/
     }
 
     return (
