@@ -12,7 +12,7 @@ function Profile() {
 
 
     const getActualUser = () => {
-        getUser().then((data) => {
+        return getUser().then((data) => {
             setId(data.id)
             setUsername(data.username);
             setFirstName(data.firstName);
@@ -29,7 +29,7 @@ function Profile() {
         editUser({
             id, username, firstName, lastName, emailAddress
         }).then((data) => {
-            getActualUser()
+            getActualUser().then(()=> setUsername(firstName))
         })
     }
 
