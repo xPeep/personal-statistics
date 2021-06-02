@@ -12,7 +12,7 @@ function Profile() {
 
 
     const getActualUser = () => {
-        return getUser().then((data) => {
+        getUser().then((data) => {
             setId(data.id)
             setUsername(data.username);
             setFirstName(data.firstName);
@@ -28,8 +28,6 @@ function Profile() {
     const saveProfileChanges = () => {
         editUser({
             id, username, firstName, lastName, emailAddress
-        }).then((data) => {
-            getActualUser().then(()=> setUsername(firstName))
         })
     }
 
