@@ -36,7 +36,7 @@ export default function IncidentsTable({
                                            deleteItemById,
                                            selectItemId,
                                        }) {
-    const classes = useStyles();
+    useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
