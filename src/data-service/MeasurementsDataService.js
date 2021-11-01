@@ -49,7 +49,7 @@ const addMeasurements = async (measurements) => {
         })
         .catch((error) => {
             console.error(error);
-            ToastMe("Rails save fail");
+            ToastMe("Incidents save fail");
         });
 };
 

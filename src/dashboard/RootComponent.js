@@ -21,12 +21,13 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import Home from "../components/Home";
 import Copyright from "./Copyright";
-import Rails from "../rails/Rails";
+import Incidents from "../incident/Incidents";
 import Profile from "../profile/Profile";
 import HomeIcon from '@material-ui/icons/Home';
 import useStyles from "./DashBoardStyles";
 import {BrowserRouter as Router, Redirect, Link, Route, Switch} from "react-router-dom";
 import Stations from "../stations/Stations";
+import Rails from "../rails/Rails";
 
 export default function RootComponent({logged}) {
     const classes = useStyles();
@@ -118,6 +119,12 @@ export default function RootComponent({logged}) {
                             </ListItemIcon>
                             <ListItemText primary="Rails"/>
                         </ListItem>
+                        <ListItem button component={Link} to="/incidents">
+                            <ListItemIcon>
+                                <BarChartIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary="Incidents"/>
+                        </ListItem>
                     </List>
                 </Drawer>
                 <main className={classes.content}>
@@ -132,6 +139,9 @@ export default function RootComponent({logged}) {
                             </Route>
                             <Route exact path="/rails">
                                 <Rails/>
+                            </Route>
+                            <Route exact path="/incidents">
+                                <Incidents/>
                             </Route>
                             <Route exact path="/profile">
                                 <Profile/>
