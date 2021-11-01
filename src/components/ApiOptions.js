@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "https://nnpro-backend.herokuapp.com/";
+const apiUrl = "https://nnpro-backend.herokuapp.com";
 //const apiUrl = "http://localhost:8080";
 
 axios.interceptors.request.use(
