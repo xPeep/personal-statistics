@@ -1,7 +1,7 @@
 const Home = ({user}) => {
     return (
-        <div >
-            <center><h1>Welcome to measurement statistics react application !</h1></center>
+        <div>
+            <center><h1>Welcome to incident resolver</h1></center>
         </div>
     );
 };

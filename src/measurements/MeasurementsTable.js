@@ -97,12 +97,15 @@ export default function MeasurementsTable({
                                 <TableCell>{row.leftLegSize}</TableCell>
                                 <TableCell>{row.rightLegSize}</TableCell>
                                 <TableCell>
-                                    <CustomColorIconButtonEdit variant="contained" onClick={selectItem.bind(this, row.id)} color="primary">
+                                    <CustomColorIconButtonEdit variant="contained"
+                                                               onClick={selectItem.bind(this, row.id)} color="primary">
                                         <EditIcon/>
                                     </CustomColorIconButtonEdit>
                                 </TableCell>
                                 <TableCell>
-                                    <CustomColorIconButtonDelete variant="contained" onClick={deleteItem.bind(this, row.id)} color="primary">
+                                    <CustomColorIconButtonDelete variant="contained"
+                                                                 onClick={deleteItem.bind(this, row.id)}
+                                                                 color="primary">
                                         <DeleteForeverIcon/>
                                     </CustomColorIconButtonDelete>
                                 </TableCell>

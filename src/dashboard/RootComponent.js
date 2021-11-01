@@ -17,17 +17,19 @@ import {logout} from "../data-service/LoginDataService";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import BarChartIcon from "@material-ui/icons/BarChart";
 import Home from "../components/Home";
 import Copyright from "./Copyright";
 import Incidents from "../incident/Incidents";
 import Profile from "../profile/Profile";
 import HomeIcon from '@material-ui/icons/Home';
 import useStyles from "./DashBoardStyles";
-import {BrowserRouter as Router, Redirect, Link, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
 import Stations from "../stations/Stations";
 import Rails from "../rails/Rails";
+import RailwayAlertIcon from '@mui/icons-material/RailwayAlert';
+import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
+import DirectionsRailwayIcon from '@mui/icons-material/DirectionsRailway';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 export default function RootComponent({logged}) {
     const classes = useStyles();
@@ -103,25 +105,25 @@ export default function RootComponent({logged}) {
                         </ListItem>
                         <ListItem button component={Link} to="/profile">
                             <ListItemIcon>
-                                <DashboardIcon/>
+                                <AccountBoxIcon/>
                             </ListItemIcon>
                             <ListItemText primary="Profile"/>
                         </ListItem>
                         <ListItem button component={Link} to="/stations">
                             <ListItemIcon>
-                                <BarChartIcon/>
+                                <TransferWithinAStationIcon/>
                             </ListItemIcon>
                             <ListItemText primary="Stations"/>
                         </ListItem>
                         <ListItem button component={Link} to="/rails">
                             <ListItemIcon>
-                                <BarChartIcon/>
+                                <DirectionsRailwayIcon/>
                             </ListItemIcon>
                             <ListItemText primary="Rails"/>
                         </ListItem>
                         <ListItem button component={Link} to="/incidents">
                             <ListItemIcon>
-                                <BarChartIcon/>
+                                <RailwayAlertIcon/>
                             </ListItemIcon>
                             <ListItemText primary="Incidents"/>
                         </ListItem>

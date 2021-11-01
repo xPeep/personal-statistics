@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         height: "100vh",
         display: "flex",
-        justifyContent:"center"
+        justifyContent: "center"
     },
     paper: {
         margin: theme.spacing(8, 4),
@@ -43,7 +43,7 @@ export default function LoginRegisterUser({logged}) {
     const classes = useStyles();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [emailAddress, setEmailAddress] = useState("");
+    const [email, setEmail] = useState("");
     const [loginForm, setLoginForm] = useState(true);
 
     const onSubmit = (e) => {
@@ -52,7 +52,7 @@ export default function LoginRegisterUser({logged}) {
         if (loginForm) {
             login({username, password}).then(() => logged());
         } else {
-            addUser({username, password, emailAddress}).then(
+            addUser({username, password, email}).then(
                 (result) => {
                     if (result) {
                         onSwitchToForm();
@@ -99,8 +99,8 @@ export default function LoginRegisterUser({logged}) {
                                 id="email"
                                 label="Email Address"
                                 name="email"
-                                value={emailAddress}
-                                onChange={(e) => setEmailAddress(e.target.value)}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         )}
                         <TextField

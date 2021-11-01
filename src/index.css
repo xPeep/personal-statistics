@@ -12,6 +12,7 @@ body {
 
 .container-flex {
     display: flex;
+    margin-top: 15px;
 }
 
 .container {

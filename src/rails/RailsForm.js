@@ -32,7 +32,7 @@ function RailsForm({
 
     const [sourceStationId, setSourceStationId] = useState('');
     const [targetStationId, setTargetStationId] = useState('');
-    const [enabledId, setEnabledId] = useState('');
+    const [enabledId, setEnabledId] = useState(0);
 
     useEffect(() => {
         if (editItemData) {
@@ -43,7 +43,7 @@ function RailsForm({
             setTargetStation(editItemData.targetStation);
             setEnabled(editItemData.enabled);
 
-            setEnabledId(editItemData.enabled)
+            setEnabledId(editItemData.enabled === false ? 1 : 0)
             setSourceStationId(editItemData.sourceStation.id)
             setTargetStationId(editItemData.targetStation.id)
         }
@@ -118,53 +118,60 @@ function RailsForm({
                     type="textField"
                     onChange={(e) => setName(!e.target.value ? null : e.target.value)}
                 />
-                <FormControl fullWidth>
-                    <InputLabel id="sourceStationLabel">Source station</InputLabel>
-                    <Select
-                        labelId="sourceStation"
-                        id="sourceStation"
-                        value={sourceStationId}
-                        label="Source station"
-                        onChange={handleChangeSourceStation}
-                    >
-                        {stations &&
-                        stations.size !== 0 &&
-                        stations
-                            .map((station) => (
-                                <MenuItem key={station.id} value={station.id}>{station.name}</MenuItem>
-                            ))}
-                    </Select>
-                </FormControl>
-                <FormControl fullWidth>
-                    <InputLabel id="targetStationLabel">Target station</InputLabel>
-                    <Select
-                        labelId="targetStation"
-                        id="targetStation"
-                        value={targetStationId}
-                        label="Target station"
-                        onChange={handleChangeTargetStation}
-                    >
-                        {stations &&
-                        stations.size !== 0 &&
-                        stations
-                            .map((station) => (
-                                <MenuItem key={station.id} value={station.id}>{station.name}</MenuItem>
-                            ))}
-                    </Select>
-                </FormControl>
-                <FormControl fullWidth>
-                    <InputLabel id="enableLabel">Enabled</InputLabel>
-                    <Select
-                        labelId="enabled"
-                        id="enabled"
-                        value={enabledId}
-                        label="Enabled"
-                        onChange={handleChangeEnabled}
-                    >
-                        <MenuItem key={1} value={true}>Activated</MenuItem>
-                        <MenuItem key={2} value={false}>Deactivated</MenuItem>
-                    </Select>
-                </FormControl>
+                <div className="container-flex">
+                    <FormControl fullWidth>
+                        <InputLabel id="sourceStationLabel">Source station</InputLabel>
+                        <Select
+                            labelId="sourceStation"
+                            id="sourceStation"
+                            value={sourceStationId}
+                            label="Source station"
+                            onChange={handleChangeSourceStation}
+                        >
+                            {stations &&
+                            stations.size !== 0 &&
+                            stations
+                                .map((station) => (
+                                    <MenuItem key={station.id} value={station.id}>{station.name}</MenuItem>
+                                ))}
+                        </Select>
+                    </FormControl>
+                </div>
+                <div className="container-flex">
+                    <FormControl fullWidth>
+                        <InputLabel id="targetStationLabel">Target station</InputLabel>
+                        <Select
+                            labelId="targetStation"
+                            id="targetStation"
+                            value={targetStationId}
+                            label="Target station"
+                            onChange={handleChangeTargetStation}
+                        >
+                            {stations &&
+                            stations.size !== 0 &&
+                            stations
+                                .map((station) => (
+                                    <MenuItem key={station.id} value={station.id}>{station.name}</MenuItem>
+                                ))}
+                        </Select>
+                    </FormControl>
+                </div>
+                <div className="container-flex">
+                    <FormControl fullWidth>
+                        <InputLabel id="enableLabel">Enabled</InputLabel>
+                        <Select
+                            labelId="enabled"
+                            id="enabled"
+                            value={enabledId}
+                            label="Enabled"
+                            onChange={handleChangeEnabled}
+
+                        >
+                            <MenuItem key={1} value={0}>Activated</MenuItem>
+                            <MenuItem key={2} value={1}>Deactivated</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
             </div>
             <div className="container-flex">
                 <Button
@@ -178,6 +185,7 @@ function RailsForm({
                 >
                     Edit
                 </Button>
+                <br/>
                 <Button
                     type="submit"
                     margin="normal"

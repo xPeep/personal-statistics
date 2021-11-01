@@ -6,8 +6,8 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {"Copyright © "}
-            <Link color="inherit" href="https://personal-statistics.com/">
-                https://personal-statistics.com/
+            <Link color="inherit" href="https://cd-incident-resolver.cz">
+                https://cd-incident-resolver.cz
             </Link>{" "}
             {new Date().getFullYear()}
             {"."}

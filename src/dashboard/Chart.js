@@ -20,7 +20,8 @@ export default function Chart({data, typeLine, name, color}) {
                         left: 24,
                     }}
                 >
-                    <XAxis dataKey="timestamp"  tickFormatter={(tick) => moment(tick).format('YYYY-MM-DD')} stroke={theme.palette.text.secondary} interval={0}/>
+                    <XAxis dataKey="timestamp" tickFormatter={(tick) => moment(tick).format('YYYY-MM-DD')}
+                           stroke={theme.palette.text.secondary} interval={0}/>
                     <YAxis stroke={theme.palette.text.secondary}>
                         <Label
                             angle={270}

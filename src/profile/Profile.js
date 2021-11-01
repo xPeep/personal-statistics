@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import {editUser, getUser} from "../data-service/UserDataService";
+import {getUser} from "../data-service/UserDataService";
 
 function Profile() {
     const [id, setId] = useState();

@@ -122,7 +122,7 @@ function IncidentsForm({
         setAffectedRailId(event.target.value)
     }
 
-    const setStartDateA = (value) =>{
+    const setStartDateA = (value) => {
         console.log(value)
     }
 
