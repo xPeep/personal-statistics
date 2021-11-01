@@ -21,7 +21,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import Home from "../components/Home";
 import Copyright from "./Copyright";
-import Measurements from "../measurements/Measurements";
+import Stations from "../stations/Stations";
 import Profile from "../profile/Profile";
 import HomeIcon from '@material-ui/icons/Home';
 import useStyles from "./DashBoardStyles";
@@ -105,11 +105,11 @@ export default function RootComponent({logged}) {
                             </ListItemIcon>
                             <ListItemText primary="Profile"/>
                         </ListItem>
-                        <ListItem button component={Link} to="/measurements">
+                        <ListItem button component={Link} to="/stations">
                             <ListItemIcon>
                                 <BarChartIcon/>
                             </ListItemIcon>
-                            <ListItemText primary="Measurements"/>
+                            <ListItemText primary="Stations"/>
                         </ListItem>
                     </List>
                 </Drawer>
@@ -120,8 +120,8 @@ export default function RootComponent({logged}) {
                             <Route exact path="/home">
                                 <Home/>
                             </Route>
-                            <Route exact path="/measurements">
-                                <Measurements/>
+                            <Route exact path="/stations">
+                                <Stations/>
                             </Route>
                             <Route exact path="/profile">
                                 <Profile/>

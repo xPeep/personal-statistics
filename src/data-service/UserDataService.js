@@ -3,7 +3,7 @@ import axios from "axios";
 import {optionsGet, optionsPost} from "../components/ApiOptions";
 
 const getUser = async () => {
-    return axios(optionsGet("/api/user"))
+    return axios(optionsGet("/api/user/details"))
         .then((res) => {
             return res.data;
         })

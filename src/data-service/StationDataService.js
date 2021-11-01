@@ -2,8 +2,8 @@ import ToastMe from "../components/ToastMe";
 import axios from "axios";
 import {optionsDelete, optionsGet, optionsPost} from "../components/ApiOptions";
 
-const getAllMeasurements = async () => {
-    return axios(optionsGet("/api/measurement"))
+const getAllStations = async () => {
+    return axios(optionsGet("/api/station"))
         .then((res) => {
             if (res.data === "error") {
                 return [];
@@ -12,12 +12,12 @@ const getAllMeasurements = async () => {
         })
         .catch((error) => {
             console.error(error);
-            ToastMe("Problem with getting data from server");
+            ToastMe("Problem with getting all stations from server");
         });
 };
 
-const deleteMeasurementById = async (id) => {
-    return axios(optionsDelete(`/api/measurement/${id}`))
+const deleteStationById = async (id) => {
+    return axios(optionsDelete(`/api/station/${id}`))
         .then((res) => {
             return true;
         })
@@ -28,34 +28,32 @@ const deleteMeasurementById = async (id) => {
         });
 };
 
-const getIntervalMeasurements = async (interval) => {
-    return axios(optionsPost(interval, "/api/measurement/interval"))
+const getStationById = async (id) => {
+    return axios(optionsGet(`/api/station/${id}`))
         .then((res) => {
-            if (res.data === "error") {
-                return [];
-            }
             return res.data;
         })
         .catch((error) => {
             console.error(error);
-            ToastMe("Problem with getting data from server");
+            ToastMe("Problem with getting station from server");
+            return false;
         });
 };
 
-const addMeasurements = async (measurements) => {
-    return axios(optionsPost(measurements, "/api/measurement"))
+const addStation = async (station) => {
+    return axios(optionsPost(station, "/api/station"))
         .then((res) => {
             return res.data;
         })
         .catch((error) => {
             console.error(error);
-            ToastMe("Stations save fail");
+            ToastMe("Station save fail");
         });
 };
 
 export {
-    getAllMeasurements,
-    getIntervalMeasurements,
-    addMeasurements,
-    deleteMeasurementById,
+    getAllStations,
+    deleteStationById,
+    getStationById,
+    addStation,
 };

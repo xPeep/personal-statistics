@@ -6,8 +6,7 @@ import {editUser, getUser} from "../data-service/UserDataService";
 function Profile() {
     const [id, setId] = useState();
     const [username, setUsername] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [role, setRole] = useState("");
     const [emailAddress, setEmailAddress] = useState("");
 
 
@@ -15,9 +14,8 @@ function Profile() {
         getUser().then((data) => {
             setId(data.id)
             setUsername(data.username);
-            setFirstName(data.firstName);
-            setLastName(data.lastName);
-            setEmailAddress(data.emailAddress);
+            setRole(data.role);
+            setEmailAddress(data.email);
         });
     }
 
@@ -34,7 +32,7 @@ function Profile() {
     return (
         <div>
             <div className="container-flex">
-                <h1>User profile</h1>
+                <h1>User profile : </h1>
             </div>
 
             <TextField
@@ -67,21 +65,11 @@ function Profile() {
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
-                name="firstName"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-            />
-            <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                label="Role"
+                name="role"
+                value={role}
+                disabled={true}
+                onChange={(e) => setRole(e.target.value)}
             />
             <Button
                 id="saveProfileDataButton"

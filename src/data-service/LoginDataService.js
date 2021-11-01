@@ -3,7 +3,7 @@ import axios from "axios";
 import {optionsPost} from "../components/ApiOptions";
 
 const login = async (credentials) => {
-    return axios(optionsPost(credentials, "/login"))
+    return axios(optionsPost(credentials, "/api/user/login"))
         .then((res) => {
             localStorage.setItem("token", res.headers.authorization);
             console.log(res.headers.authorization);
