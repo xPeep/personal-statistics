@@ -14,7 +14,7 @@ const getUser = async () => {
 };
 
 const addUser = async (userInfo) => {
-    return axios(optionsPost(userInfo, "/api/user"))
+    return axios(optionsPost(userInfo, "/api/user/register"))
         .then((res) => {
             return true;
         })

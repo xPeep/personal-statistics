@@ -43,8 +43,6 @@ export default function LoginRegisterUser({logged}) {
     const classes = useStyles();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
     const [emailAddress, setEmailAddress] = useState("");
     const [loginForm, setLoginForm] = useState(true);
 
@@ -54,7 +52,7 @@ export default function LoginRegisterUser({logged}) {
         if (loginForm) {
             login({username, password}).then(() => logged());
         } else {
-            addUser({username, password, firstName, lastName, emailAddress}).then(
+            addUser({username, password, emailAddress}).then(
                 (result) => {
                     if (result) {
                         onSwitchToForm();
@@ -118,32 +116,6 @@ export default function LoginRegisterUser({logged}) {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        {!loginForm && (
-                            <div>
-                                <TextField
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="firstName"
-                                    label="First Name"
-                                    name="firstName"
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                />
-                                <TextField
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
-                                />
-                            </div>
-                        )}
                         <Button
                             id="buttonSubmit2"
                             type="submit"
