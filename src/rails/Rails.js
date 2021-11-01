@@ -1,50 +1,50 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import StationsTable from "./StationsTable";
-import StationsForm from "./StationsForm";
+import RailsTable from "./RailsTable";
+import RailsForm from "./RailsForm";
 
 import clsx from "clsx";
 import useStyles from "../dashboard/DashBoardStyles";
-import {addStation, deleteStationById, getAllStations} from "../data-service/StationDataService";
-import {getRegions} from "../data-service/RegionDataService";
+import {getAllStations} from "../data-service/StationDataService";
+import {addRail, deleteRailById, getAllRails} from "../data-service/RailDataService";
 
-export default function Stations() {
+export default function Rails() {
     const classes = useStyles();
     clsx(classes.paper, classes.fixedHeight);
+    const [rails, setRails] = useState([]);
     const [stations, setStations] = useState([]);
-    const [regions, setRegions] = useState([]);
     const [editItemData, setEditItemData] = useState();
 
     useEffect(() => {
-        getRegions().then((regions) => {
-            setRegions(regions)
+        getAllStations().then((regions) => {
+            setStations(regions)
         });
-        getAllStations().then((data) => {
-            setStations(data);
+        getAllRails().then((data) => {
+            setRails(data);
         });
     }, []);
 
     const deleteItemById = (id) => {
-        deleteStationById(id).then((result) => {
+        deleteRailById(id).then((result) => {
             if (result) {
-                getAllStations().then((data) => {
-                    setStations(data);
+                getAllRails().then((data) => {
+                    setRails(data);
                 });
             }
         });
     };
 
     const selectItemId = (id) => {
-        let result = stations.filter((item) => item.id === id);
+        let result = rails.filter((item) => item.id === id);
         setEditItemData(result[0]);
     };
 
-    const saveStation = (station) => {
-        addStation(station).then((result) => {
+    const saveRail = (station) => {
+        addRail(station).then((result) => {
             if (result) {
-                getAllStations().then((data) => {
-                    setStations(data);
+                getAllRails().then((data) => {
+                    setRails(data);
                 });
             }
         });
@@ -54,17 +54,17 @@ export default function Stations() {
         <div>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <StationsForm
-                        regions={regions}
-                        saveStation={saveStation}
+                    <RailsForm
+                        stations={stations}
+                        saveRail={saveRail}
                         editItemData={editItemData}
-                        getAllStations={getAllStations}
+                        getAllRails={getAllRails}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <Paper className={classes.paper}>
-                        <StationsTable
-                            data={stations}
+                        <RailsTable
+                            data={rails}
                             deleteItemById={deleteItemById}
                             selectItemId={selectItemId}
                         />

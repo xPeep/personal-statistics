@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function StationsTable({
-                                          data,
-                                          deleteItemById,
-                                          selectItemId,
-                                      }) {
+export default function RailsTable({
+                                       data,
+                                       deleteItemById,
+                                       selectItemId,
+                                   }) {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -67,11 +67,11 @@ export default function StationsTable({
                     <TableRow>
                         <TableCell>Code</TableCell>
                         <TableCell>Name</TableCell>
-                        <TableCell>Region</TableCell>
-                        <TableCell>Coordinate X</TableCell>
-                        <TableCell>Coordinate Y</TableCell>
+                        <TableCell>Source station</TableCell>
+                        <TableCell>Target station</TableCell>
+                        <TableCell>Enabled</TableCell>
                         <TableCell>Edit</TableCell>
-                        <TableCell align="right">Delete</TableCell>
+                        <TableCell>Delete</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -83,9 +83,9 @@ export default function StationsTable({
                             <TableRow key={row.id}>
                                 <TableCell>{row.code}</TableCell>
                                 <TableCell>{row.name}</TableCell>
-                                <TableCell>{row.region.name}</TableCell>
-                                <TableCell>{row.x}</TableCell>
-                                <TableCell>{row.y}</TableCell>
+                                <TableCell>{row.sourceStation.name}</TableCell>
+                                <TableCell>{row.targetStation.name}</TableCell>
+                                <TableCell>{row.enabled ? "Activated" : "Deactivated"}</TableCell>
                                 <TableCell>
                                     <CustomColorIconButtonEdit variant="contained"
                                                                onClick={selectItem.bind(this, row.id)} color="primary">

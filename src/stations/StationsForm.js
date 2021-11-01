@@ -164,7 +164,7 @@ function StationsForm({
                     New
                 </Button>
             </div>
-            <Button
+            {/*            <Button
                 type="submit"
                 variant="contained"
                 color="primary"
@@ -172,7 +172,7 @@ function StationsForm({
                 fullWidth={true}
             >
                 Load
-            </Button>
+            </Button>*/}
         </div>
     );
 }
